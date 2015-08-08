@@ -1,57 +1,40 @@
+# Coursera JHU Exploratory Data Analysis
 # Course Assignment 1. Plot 1.
-# Author: subwarp
-#
-setwd("~/src/jhu-data-science-course/external/ExData_Plotting1")
 
 library(dplyr)
 library(logging)
 basicConfig(level = 'DEBUG')
 
-# dates 2007-02-01 and 2007-02-02
-#read.table()
-data.file <- file.path("data", "household_power_consumption.txt")
+# CONFIG #
+# Note: Set your working directory accordingly.
+# Step 1. Set path to the household_power_consumption.txt
 
-pcdata <- read.table(textConnection(grep("2/1/2007|2/2/2007",
-                                         readLines(data.file),
-                                         value = TRUE),
-                                    ), sep=";", na.strings = "?")
+DoPlot1 <- function(pcdata.file) {
 
-colnames(pcdata) <- c("Date", "Time", "Global_active_power", "Global_reactive_power",
-                      "Voltage", "Global_intensity", "Sub_metering_1", "Sub_metering_2",
-                      "Sub_metering_3")
-
-pcdata$Date2 <- lapply(pcdata$Date, as.Date, format = "")
-
-
-FixDateString <- function(date.string) {
-  #loginfo("FixDateString - Input: %s (%s)", date.string, class(date.string))
-  if (is.factor(date.string)) {
-    date.string <- as.character(date.string)
+  if (!file.exists(pcdata.file)) {
+    stop(sprintf("Data file %s does not exist. Am out!", pcdata.file))
   }
-  date.elements <- unlist(strsplit(date.string, "/"))
-  month <- as.numeric(date.elements[2]);
-  day <- as.numeric(date.elements[2]);  
-  if (month < 10) {
-    date.elements[1] = sprintf("0%s", month)
-  }
-  if (day < 10) {
-    date.elements[2] = sprintf("0%s", day)
-  }  
-  sprintf("%s/%s/%s", date.elements[1], date.elements[2], date.elements[3])     
+
+  logdebug("Loading data file: %s", pcdata.file)
+  pcdata <- read.table(textConnection(grep("^2/1/2007|^2/2/2007",
+                                           readLines(pcdata.file),
+                                           value = TRUE)), sep=";",
+                                      na.strings = "?")
+
+  colnames(pcdata) <- c("Date", "Time", "Global_active_power",
+                        "Global_reactive_power", "Voltage", "Global_intensity",
+                        "Sub_metering_1", "Sub_metering_2", "Sub_metering_3")
+
+
+  png(file = "plot1.png")
+  hist(pcdata$Global_active_power, col="red", main="Global Active Power",
+       xlab = "GLobal Active Power (Kilowatts)")
+  dev.off()
 }
 
-
-### mapply(function(d, t) {
-###   d <- FixDateString(as.character(d))
-###   date.time <- paste(d, t)
-###   strptime(date.time, "%m/%d/%Y %H:%M:%S")[1][1]
-### }, head(pcdata$Date, 2), head(pcdata$Time, 2), SIMPLIFY = FALSE))
-### 
-### 
-### pcdata <- mutate(pcdata, Date2 = paste(FixDateString(Date), Time))
-### 
-### strptime(paste(FixDateString(Date), Time), "%m/%d/%Y %H:%M:%S"))
-### pcdata <- select(pcdata, -Date2)
-
-
-hist(pcdata$Global_active_power)
+Test <- function() {
+  # Runs DoPlot1.
+  # Data is in a subdirectory in file: household_power_consumption.txt
+  data.file <- file.path("data", "household_power_consumption.txt")
+  DoPlot1(data.file)
+}
