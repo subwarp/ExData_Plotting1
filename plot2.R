@@ -3,9 +3,9 @@
 
 library(dplyr)
 
-source("common.R")
+source("common.R") #  Code for loading data is factored out to common.R
 
-# Running 
+# Running
 # Note: Set your working directory accordingly.
 # Step 1. Source this file. ie. source("plot2.R")
 # Step 2. Load the data via function LoadData(<path.to.data.file>)
@@ -17,7 +17,7 @@ source("common.R")
 
 DoPlot2 <- function(pcdata) {
   png(file="plot2.png")
-  plot(x=pcdata$Date.Time, y=pcdata$Global_active_power, 
+  plot(x=pcdata$Date.Time, y=pcdata$Global_active_power,
        main = "", xlab = "",
        ylab = "GLobal Active Power (Kilowatts)", type="l")
   dev.off()

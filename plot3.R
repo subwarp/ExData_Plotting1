@@ -3,9 +3,9 @@
 
 library(dplyr)
 
-source("common.R")
+source("common.R") #  Code for loading data is factored out to common.R
 
-# Running 
+# Running
 # Note: Set your working directory accordingly.
 # Step 1. Source this file. ie. source("plot3.R")
 # Step 2. Load the data via function LoadData(<path.to.data.file>)
@@ -18,10 +18,10 @@ source("common.R")
 
 DoPlot3 <- function(pcdata) {
   png(file="plot3.png")
-  plot(x=pcdata$Date.Time, y=pcdata$Sub_metering_1, 
+  plot(x=pcdata$Date.Time, y=pcdata$Sub_metering_1,
        main = "", xlab = "",
        ylab = "Energy sub metering", type="l")
-  
+
   lines(x=pcdata$Date.Time, y=pcdata$Sub_metering_2, col="red")
   lines(x=pcdata$Date.Time, y=pcdata$Sub_metering_3, col="blue")
   legend("topright", lwd=2, col = c("black", "red", "blue"),

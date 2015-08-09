@@ -3,9 +3,9 @@
 
 library(dplyr)
 
-source("common.R")
+source("common.R") #  Code for loading data is factored out to common.R
 
-# Running 
+# Running
 # Note: Set your working directory accordingly.
 # Step 1. Source this file. ie. source("plot1.R")
 # Step 2. Load the data via function LoadData(<path.to.data.file>)

@@ -3,7 +3,7 @@
 
 library(dplyr)
 
-source("common.R")
+source("common.R") #  Code for loading data is factored out to common.R
 
 # Running
 # Note: Set your working directory accordingly.
