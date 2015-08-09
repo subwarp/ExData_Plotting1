@@ -1,5 +1,5 @@
 # Coursera JHU Exploratory Data Analysis
-# Course Assignment 1. Plot 2.
+# Course Assignment 1. Plot 3.
 
 library(dplyr)
 
