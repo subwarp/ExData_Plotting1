@@ -40,7 +40,7 @@ DoPlot4 <- function(pcdata) {
     legend("topright", lwd=2, bty = "n", col = c("black", "red", "blue"),
            legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 
-    # Draw forth graph
+    # Draw fourth graph
     plot(x=pcdata$Date.Time, y=pcdata$Global_reactive_power,
          main = "", xlab = "datetime",
          ylab = "GLobal_reactive_power", type="l")
