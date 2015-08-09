@@ -37,7 +37,7 @@ DoPlot4 <- function(pcdata) {
 
     lines(x=pcdata$Date.Time, y=pcdata$Sub_metering_2, col="red")
     lines(x=pcdata$Date.Time, y=pcdata$Sub_metering_3, col="blue")
-    legend("topright", lwd=2, col = c("black", "red", "blue"),
+    legend("topright", lwd=2, bty = "n", col = c("black", "red", "blue"),
            legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3"))
 
     # Draw forth graph
